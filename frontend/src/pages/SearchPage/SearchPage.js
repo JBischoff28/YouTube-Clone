@@ -8,7 +8,7 @@ const SearchPage = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        let response = await axios.get("https://www.googleapis.com/youtube/v3/search?key=AIzaSyDPGOO0T4jFJdR0PLayq6N6Wum3OoW8n58&part=snippet&type=video&maxResults=6");
+        let response = await axios.get("");
         setVideos(response.data)
       } catch (error) {
         console.log(error.message)
