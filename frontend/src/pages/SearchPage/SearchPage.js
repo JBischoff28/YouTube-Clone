@@ -4,6 +4,7 @@ import { KEY } from "../../localKey.js"
 
 //Component Imports
 import SearchBar from "../../components/SearchBar/SearchBar.jsx";
+import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.jsx";
 
 const SearchPage = () => {
 
@@ -13,6 +14,7 @@ const SearchPage = () => {
     try {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${KEY}&part=snippet&type=video&maxResults=6`);
       setVideos(response.data)
+      console.log(videos);
     } catch (error) {
       console.log(error.message)
     }
@@ -20,7 +22,8 @@ const SearchPage = () => {
 
   return (
     <div className="container">
-      <SearchBar />
+      <SearchBar setVideos={setVideos}/>
+      <VideoPlayer videos={videos}/>
     </div>
   );
 };
