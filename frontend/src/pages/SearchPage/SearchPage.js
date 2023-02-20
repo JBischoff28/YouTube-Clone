@@ -23,7 +23,7 @@ const SearchPage = () => {
   return (
     <div className="container">
       <SearchBar setVideos={setVideos}/>
-      <VideoPlayer videos={videos}/>
+      <VideoPlayer videos={[videos]}/>
     </div>
   );
 };
