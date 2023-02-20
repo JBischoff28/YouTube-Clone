@@ -17,7 +17,7 @@ const SearchBar = (props) => {
     function handleSubmit(event) {
         event.preventDefault();
         console.log(search);
-        searchVideos(search)
+        searchVideos(search);
     }
 
     return ( 
