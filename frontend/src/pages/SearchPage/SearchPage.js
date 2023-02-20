@@ -12,10 +12,12 @@ const SearchPage = () => {
   const [videos, setVideos] = useState([]);
 
   async function searchVideos (search) {
+    setVideos([]);
     try {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${KEY2}&part=snippet&type=video&maxResults=6`);
         console.log(response.data);
         setVideos(response.data);
+        console.log(videos);
     } catch (error) {
         console.log(error.message);
     }
@@ -34,14 +36,7 @@ const SearchPage = () => {
   return (
     <div className="container">
       <SearchBar searchVideos={searchVideos}/>
-      <div className="videoTray">
-        <VideoPlayer videos={videos}/>
-        <VideoPlayer videos={videos}/>
-        <VideoPlayer videos={videos}/>
-        <VideoPlayer videos={videos}/>
-        <VideoPlayer videos={videos}/>
-        <VideoPlayer videos={videos}/>
-      </div>
+      <VideoPlayer />
     </div>
   );
 };
