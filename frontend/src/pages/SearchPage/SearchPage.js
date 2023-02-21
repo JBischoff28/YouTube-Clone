@@ -36,7 +36,6 @@ const SearchPage = () => {
   return (
     <div className="container">
       <SearchBar searchVideos={searchVideos}/>
-      <VideoPlayer />
     </div>
   );
 };
