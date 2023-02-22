@@ -5,37 +5,25 @@ import { KEY2 } from "../../localKey.js";
 
 //Component Imports
 import SearchBar from "../../components/SearchBar/SearchBar.jsx";
-import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.jsx";
+import SearchResults from "../../components/SearchResults/SearchResults.jsx";
 
 const SearchPage = () => {
 
   const [videos, setVideos] = useState([]);
 
-  async function searchVideos (search) {
-    setVideos([]);
-    try {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${KEY2}&part=snippet&type=video&maxResults=6`);
-        console.log(response.data);
-        setVideos(response.data);
-        console.log(videos);
-    } catch (error) {
-        console.log(error.message);
-    }
-  }
-
   async function fetchVideos () {
     try {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${KEY2}&part=snippet&type=video&maxResults=6`);
-      setVideos(response.data)
-      console.log(videos);
+      setVideos(response.data.items);
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   }
 
   return (
     <div className="container">
-      <SearchBar searchVideos={searchVideos}/>
+      <SearchBar setVideos={setVideos}/>
+      <SearchResults videos={videos}/>
     </div>
   );
 };
