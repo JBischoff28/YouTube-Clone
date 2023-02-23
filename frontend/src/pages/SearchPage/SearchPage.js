@@ -12,7 +12,10 @@ const SearchPage = () => {
   const [videos, setVideos] = useState([]);
 
   function test (){
-    console.log(videos);
+    setTimeout(() => {
+      console.log(videos);
+    }, 10000);
+
   }
 
   async function fetchVideos () {
