@@ -12,7 +12,6 @@ const SearchBar = (props) => {
             let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${KEY}&part=snippet&type=video&maxResults=6`);
             console.log(response.data.items);
             props.setVideos(response.data.items);
-            props.test()
         } catch (error) {
             console.log(error.message);
         }

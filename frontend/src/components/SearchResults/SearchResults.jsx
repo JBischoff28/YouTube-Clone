@@ -1,25 +1,24 @@
-
+import { Link } from "react-router-dom";
 
 const SearchResults = (props) => {
 
-    function loadComponents() {
-        if (!props.videos[0]){
-            {}
-        }
-        else {
-            <div>
-                {props.videos.map((video, index) => {
-                    <div key={index}>
-                        <img src={video.snippet.thumbnails.medium}/>
-                        <p>{video.snippet.title}</p>
-                    </div>
-                })}
-            </div>
-        }
-    }
-
     return ( 
-        [loadComponents()]
+        <div>
+            {props.videos.map((video) => {
+                if (video.snippet) {
+                    return (
+                        <div key={video.id.videoId}>
+                            <Link to={`/video/${video.id.videoId}`}>
+                                <div>
+                                    <img src={video.snippet.thumbnails.medium.url} alt='video thumbnail'/>
+                                    <h3>{video.snippet.title}</h3>
+                                </div>
+                            </Link>
+                        </div>
+                    );
+                }
+            })}
+        </div>
      );
 }
  
