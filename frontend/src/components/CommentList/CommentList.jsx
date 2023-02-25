@@ -12,12 +12,15 @@ const CommentList = (props) => {
 
     async function AllComments () {
         const response = await axios.get("http://127.0.0.1:8000/api/comments/all/");
+        console.log(response.data);
         setComments(response.data);
     }
 
     return ( 
         <div>
-            <Comment entry={comments}/>
+            {comments.map((comment, index) => {
+                <Comment key={index} comment={comment}/>
+            })}
         </div>
      );
 }
