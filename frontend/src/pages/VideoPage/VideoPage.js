@@ -9,6 +9,7 @@ import { KEY2 } from "../../localKey.js";
 //Component Imports
 import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import CommentList from '../../components/CommentList/CommentList';
+import SearchResults from '../../components/SearchResults/SearchResults.jsx';
 
 const VideoPage = () => {
 
@@ -21,7 +22,7 @@ const VideoPage = () => {
 
     async function GetRelatedVideos() {
         try {
-            const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=3&key=${KEY}}&relatedToVideoId=${videoId}`);
+            const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=3&key=${KEY}&relatedToVideoId=${videoId}`);
             console.log(response.data.items);
             setRelatedVideos(response.data.items);
         } catch (error) {
@@ -33,6 +34,7 @@ const VideoPage = () => {
         <div className="container">
             <CommentList />
             <VideoPlayer videoId={videoId} />
+            <SearchResults videos={relatedVideos}/>
         </div>
      );
 }
