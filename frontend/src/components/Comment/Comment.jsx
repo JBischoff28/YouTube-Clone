@@ -8,7 +8,7 @@ const Comment = (props) => {
     return ( 
         <div>
           <h4>{user.username}</h4>
-          <p>{props.comment.text}</p>
+          <p>{props.comments.text}</p>
         </div>
      );
 }

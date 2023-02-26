@@ -11,14 +11,23 @@ import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import CommentList from '../../components/CommentList/CommentList';
 import SearchResults from '../../components/SearchResults/SearchResults.jsx';
 
-const VideoPage = () => {
+const VideoPage = (props) => {
 
     const { videoId } = useParams();
     const [relatedVideos, setRelatedVideos] = useState([]);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         //GetRelatedVideos();
+        AllComments();
     }, []);
+
+    async function AllComments () {
+        const response = await axios.get("http://127.0.0.1:8000/api/comments/all/");
+        console.log(response.data);
+        setComments(response.data);
+        filterComments();
+    }
 
     async function GetRelatedVideos() {
         try {
@@ -30,11 +39,23 @@ const VideoPage = () => {
         }
     }
 
+    function filterComments() {
+        let videoComments = comments.filter((el) => {
+            if (el.video_id === videoId) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+        setComments(videoComments);
+    }
+
     return ( 
         <div className="container">
-            <CommentList />
+            <CommentList comments={comments}/>
             <VideoPlayer videoId={videoId} />
-            <SearchResults videos={relatedVideos}/>
+            <SearchResults videos={relatedVideos} />
         </div>
      );
 }
