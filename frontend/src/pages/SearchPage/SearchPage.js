@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { KEY } from "../../localKey.js";
 import { KEY2 } from "../../localKey.js";
+import "./SearchPage.css";
 
 //Component Imports
 import SearchBar from "../../components/SearchBar/SearchBar.jsx";
@@ -12,7 +13,7 @@ const SearchPage = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    //fetchVideos();
+    fetchVideos();
   }, []);
 
   async function fetchVideos () {

@@ -17,7 +17,7 @@ const Navbar = () => {
         </li>
         <li className="userWelcome">
           {user ? (
-            <b style={{ alignItems: "center"}}>Welcome: {user.username}</b>
+            <b style={{ textAlign: "center"}}>Welcome: {user.username}</b>
           ) : (
             <b>{}</b>
           )}</li>

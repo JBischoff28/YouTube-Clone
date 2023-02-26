@@ -1,0 +1,11 @@
+.resultContainer {
+    display: grid;
+    grid-template-areas: 
+    "top top top"
+    "bot bot bot";
+    justify-content: center;
+}
+
+.result {
+    margin: 3em;
+}

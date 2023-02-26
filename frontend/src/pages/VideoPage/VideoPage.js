@@ -13,7 +13,7 @@ import SearchResults from '../../components/SearchResults/SearchResults.jsx';
 
 const VideoPage = (props) => {
 
-    const { videoId } = useParams();
+    const { videoId, video } = useParams();
     const [relatedVideos, setRelatedVideos] = useState([]);
     const [comments, setComments] = useState([]);
 
@@ -53,9 +53,23 @@ const VideoPage = (props) => {
 
     return ( 
         <div className="container">
-            <CommentList comments={comments}/>
-            <VideoPlayer videoId={videoId} />
-            <SearchResults videos={relatedVideos} />
+            <div>
+                <CommentList comments={comments}/>
+            </div>
+            <div className='videoPlayer'>
+                <VideoPlayer videoId={videoId} />
+            </div>
+            <div>
+                <ul>
+                    <li><h3>Title</h3></li>
+                    <li>{video}</li>
+                    <li><h3>Description</h3></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div className='relatedResults'>
+                <SearchResults videos={relatedVideos} />
+            </div>
         </div>
      );
 }
