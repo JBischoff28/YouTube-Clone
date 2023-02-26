@@ -18,7 +18,7 @@ const VideoPage = (props) => {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        //GetRelatedVideos();
+        GetRelatedVideos();
         AllComments();
     }, []);
 

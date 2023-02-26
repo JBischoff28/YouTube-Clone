@@ -26,8 +26,12 @@ const SearchPage = () => {
 
   return (
     <div className="container">
-      <SearchBar setVideos={setVideos} />
-      <SearchResults videos={videos} />
+      <div className="searchContainer">
+        <SearchBar setVideos={setVideos} />
+      </div>
+      <div className="resultsContainer">
+        <SearchResults videos={videos} />
+      </div>
     </div>
   );
 };
