@@ -10,17 +10,34 @@ import { KEY2 } from "../../localKey.js";
 import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import CommentList from '../../components/CommentList/CommentList';
 import SearchResults from '../../components/SearchResults/SearchResults.jsx';
+import useAuth from '../../hooks/useAuth.js';
 
 const VideoPage = (props) => {
 
     const { videoId, video } = useParams();
+    const [user, token] = useAuth();
     const [relatedVideos, setRelatedVideos] = useState([]);
     const [comments, setComments] = useState([]);
+    const [currentVideo, setCurrentVideo] = useState([]);
 
     useEffect(() => {
+        GetCurrentVideo();
         GetRelatedVideos();
-        AllComments();
     }, []);
+
+    useEffect(() => {
+        AllComments();
+    }, [token]);
+
+    async function GetCurrentVideo () {
+        try {
+            let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${KEY2}&part=snippet&type=video&maxResults=1`);
+            console.log(response.data.items);
+            setCurrentVideo(response.data.items);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     async function AllComments () {
         const response = await axios.get("http://127.0.0.1:8000/api/comments/all/");
@@ -31,7 +48,7 @@ const VideoPage = (props) => {
 
     async function GetRelatedVideos() {
         try {
-            const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=3&key=${KEY}&relatedToVideoId=${videoId}`);
+            const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=3&key=${KEY2}&relatedToVideoId=${videoId}`);
             console.log(response.data.items);
             setRelatedVideos(response.data.items);
         } catch (error) {
@@ -62,9 +79,33 @@ const VideoPage = (props) => {
             <div>
                 <ul>
                     <li><h3>Title</h3></li>
-                    <li>{video}</li>
+                    <li>
+                        <div>
+                            {currentVideo.map((video, index) => {
+                                if (video.snippet) {
+                                    return (
+                                        <div key={index}>
+                                            <p>{video.snippet.title}</p>
+                                        </div>
+                                    );
+                                }
+                            })}
+                        </div>
+                    </li>
                     <li><h3>Description</h3></li>
-                    <li></li>
+                    <li>
+                        <div>
+                            {currentVideo.map((video, index) => {
+                                if (video.snippet) {
+                                    return (
+                                        <div key={index}>
+                                            <p>{video.snippet.description}</p>
+                                        </div>
+                                    );
+                                }
+                            })}
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div className='relatedResults'>

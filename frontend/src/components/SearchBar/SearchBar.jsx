@@ -10,7 +10,7 @@ const SearchBar = (props) => {
 
     async function searchVideos (search) {
         try {
-            let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${KEY}&part=snippet&type=video&maxResults=6`);
+            let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${search}&key=${KEY2}&part=snippet&type=video&maxResults=6`);
             console.log(response.data.items);
             props.setVideos(response.data.items);
         } catch (error) {

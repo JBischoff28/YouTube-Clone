@@ -9,7 +9,7 @@ const SearchResults = (props) => {
                 if (video.snippet) {
                     return (
                         <div className="result" key={video.id.videoId}>
-                            <Link to={`/${video.snippet.title}/${video.id.videoId}`}>
+                            <Link to={`/video/${video.id.videoId}`}>
                                 <div>
                                     <img src={video.snippet.thumbnails.medium.url} alt='video thumbnail'/>
                                     <h3>{video.snippet.title}</h3>

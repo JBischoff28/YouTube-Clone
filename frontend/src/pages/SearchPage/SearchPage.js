@@ -18,7 +18,7 @@ const SearchPage = () => {
 
   async function fetchVideos () {
     try {
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${KEY}&part=snippet&type=video&maxResults=6`);
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${KEY2}&part=snippet&type=video&maxResults=6`);
       setVideos(response.data.items);
     } catch (error) {
       console.log(error.message);
